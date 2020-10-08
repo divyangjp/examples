@@ -17,9 +17,9 @@ spec:
           image: networkservicemesh/proxy-sidecar-nse:latest
           imagePullPolicy: IfNotPresent
           env:
-            - name: ENDPOINT_NETWORK_SERVICE
+            - name: ADVERTISE_NSE_NAME
               value: "web-service"
-            - name: ENDPOINT_LABELS
+            - name: ADVERTISE_NSE_LABELS
               value: "app=nginx,color=green"
             - name: TRACER_ENABLED
               value: "true"
@@ -29,7 +29,7 @@ spec:
             limits:
               networkservicemesh.io/socket: 1
         - name: nginx
-          image: networkservicemesh/proxy-nginx
+          image: networkservicemesh/proxy-nginx:master
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - mountPath: /usr/share/nginx/html/index.html

@@ -14,10 +14,10 @@ spec:
         networkservicemesh.io/impl: "web-service"
     spec:
       nodeSelector:
-        node-role.kubernetes.io/master: ""
+        node-role.kubernetes.io/controlplane: "true"
       containers:
         - name: proxy-nsc
-          image: networkservicemesh/proxy-proxy-nsc:latest
+          image: networkservicemeshci/proxy-proxy-nsc:master
           imagePullPolicy: IfNotPresent
           env:
             - name: CLIENT_NETWORK_SERVICE
