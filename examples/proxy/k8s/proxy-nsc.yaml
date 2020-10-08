@@ -17,7 +17,7 @@ spec:
         node-role.kubernetes.io/controlplane: "true"
       containers:
         - name: proxy-nsc
-          image: networkservicemeshci/proxy-proxy-nsc:master
+          image: networkservicemesh/proxy-proxy-nsc:master
           imagePullPolicy: IfNotPresent
           env:
             - name: CLIENT_NETWORK_SERVICE
