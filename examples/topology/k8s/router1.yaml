@@ -21,7 +21,7 @@ spec:
               networkservicemesh.io/socket: "1"
           env:
             - name: NS_NETWORKSERVICEMESH_IO
-              value: "topo/eth12?link=r1-r2&peerif=eth21"
+              value: "topo/topoeth12?link=r1-r2&peerif=topoeth21"
         - name: sidecar-nse
           image: networkservicemesh/topology-sidecar-nse:master
           imagePullPolicy: IfNotPresent

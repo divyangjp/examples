@@ -13,15 +13,14 @@ spec:
         device: "router2"
     spec:
       containers:
-        - name: sidecar-nsc
-          image: networkservicemesh/topology-sidecar-nsc:master
+        - name: vsftpd
+          image: fauria/vsftpd
           imagePullPolicy: IfNotPresent
-          resources:
-            limits:
-              networkservicemesh.io/socket: "1"
           env:
-            - name: NS_NETWORKSERVICEMESH_IO
-              value: "topo/eth23?link=r2-r3&peerif=eth32"
+            - name: FTP_PASS
+              value: "password"
+            - name: PASV_ADDRESS
+              value: "192.0.2.2"
         - name: sidecar-nse
           image: networkservicemesh/topology-sidecar-nse:master
           imagePullPolicy: IfNotPresent

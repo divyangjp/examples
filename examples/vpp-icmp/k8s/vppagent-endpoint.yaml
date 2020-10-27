@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: vppagent-endpoint
-          image: networkservicemesh/vpp-icmp-vppagent-endpoint:latest
+          image: networkservicemesh/vpp-icmp-vppagent-endpoint:master
           imagePullPolicy: IfNotPresent
           env:
             - name: ENDPOINT_NETWORK_SERVICE

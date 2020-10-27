@@ -14,7 +14,7 @@ spec:
       hostPID: true
       containers:
         - name: vppagent-client
-          image: networkservicemesh/vpp-icmp-vppagent-client:latest
+          image: networkservicemesh/vpp-icmp-vppagent-client:master
           imagePullPolicy: IfNotPresent
           env:
             - name: CLIENT_NETWORK_SERVICE

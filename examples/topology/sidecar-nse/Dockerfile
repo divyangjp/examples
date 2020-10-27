@@ -12,4 +12,6 @@ ADD [".","/root/networkservicemesh"]
 RUN CGO_ENABLED=0 GOOS=linux go build -ldflags '-extldflags "-static"' -o /go/bin/sidecar-nse ./examples/topology/sidecar-nse/cmd/...
 FROM alpine as runtime
 COPY --from=build /go/bin/sidecar-nse /bin/sidecar-nse
+RUN apk add openrc
+RUN apk add vsftpd
 ENTRYPOINT ["/bin/sidecar-nse"]

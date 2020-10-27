@@ -15,7 +15,7 @@ for nsc in $(kubectl get -n default pods -o=name | grep -E "simple-client" | sed
         fi
 
         if [ -n "${targetIp}" ]; then
-            if kubectl exec -n default -it "${nsc}" -- ping -c 1 "${targetIp}" ; then
+            if kubectl exec -n default -it "${nsc}" -- ping -c 10 "${targetIp}" ; then
                 echo "NSC ${nsc} with IP ${ip} pinging ${endpointName} TargetIP: ${targetIp} successful"
                 PingSuccess="true"
             else

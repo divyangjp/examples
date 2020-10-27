@@ -5,7 +5,7 @@ spec:
   selector:
     matchLabels:
       networkservicemesh.io/app: "simple-client"
-  replicas: 4
+  replicas: 1
   template:
     metadata:
       labels:
@@ -15,6 +15,13 @@ spec:
         - name: alpine
           image: alpine:latest
           command: ["tail", "-f", "/dev/null"]
+      affinity:
+        podAntiAffinity:                                 
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - topologyKey: kubernetes.io/hostname
+            labelSelector:                               
+              matchLabels:                               
+                networkservicemesh.io/impl: "simple-endpoint" 
 metadata:
   name: "simple-client"
   namespace: default

@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       networkservicemesh.io/app: "icmp-responder"
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: sidecar-endpoint
-          image: networkservicemesh/proxy-sidecar-nse:latest
+          image: networkservicemesh/proxy-sidecar-nse:master
           imagePullPolicy: IfNotPresent
           env:
             - name: ENDPOINT_NETWORK_SERVICE
