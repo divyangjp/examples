@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      networkservicemesh.io/app: "gateway"
+      networkservicemesh.io/impl: "service-chain"
+  template:
+    metadata:
+      labels:
+        networkservicemesh.io/app: "gateway"
+        networkservicemesh.io/impl: "service-chain"
+    spec:
+      containers:
+        - name: gateway
+          image: networkservicemesh/proxy-sidecar-nse:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: ENDPOINT_NETWORK_SERVICE
+              value: "service-chain"
+            - name: ENDPOINT_LABELS
+              value: "app=gateway"
+            - name: TRACER_ENABLED
+              value: "true"
+            - name: IP_ADDRESS
+              value: "10.60.1.0/24"
+          resources:
+            limits:
+              networkservicemesh.io/socket: 1
+        - name: nginx
+          image: networkservicemesh/nginx
+          imagePullPolicy: IfNotPresent
+        - name: python
+          image: python:slim
+          command: ["python", "-m", "http.server", "8080"]
+          imagePullPolicy: IfNotPresent
+metadata:
+  name: gateway
