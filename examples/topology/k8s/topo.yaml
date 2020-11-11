@@ -14,3 +14,17 @@ spec:
         - destination:
           destinationSelector:
             device: router2
+    - match:
+      sourceSelector:
+        link: r2-r3
+      route:
+        - destination:
+          destinationSelector:
+            device: router3
+    - match:
+      sourceSelector:
+        link: r3-r1
+      route:
+        - destination:
+          destinationSelector:
+            device: router1
