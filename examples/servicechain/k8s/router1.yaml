@@ -13,6 +13,15 @@ spec:
         device: "router1"
     spec:
       containers:
+        - name: sidecar-nsc
+          image: networkservicemesh/topology-sidecar-nsc:master
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              networkservicemesh.io/socket: "1"
+          env:
+            - name: NS_NETWORKSERVICEMESH_IO
+              value: "service-chain/chaineth12?link=r1-r2&peerif=chaineth21"      
         - name: sidecar-nse
           image: networkservicemesh/topology-sidecar-nse:master
           imagePullPolicy: IfNotPresent
@@ -20,7 +29,7 @@ spec:
             - name: ENDPOINT_NETWORK_SERVICE
               value: "service-chain"
             - name: ENDPOINT_LABELS
-              value: "device=router1"
+              value: "app=router1,device=router1"
             - name: TRACER_ENABLED
               value: "true"
             - name: IP_ADDRESS

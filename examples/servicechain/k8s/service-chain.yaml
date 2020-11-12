@@ -9,18 +9,22 @@ spec:
     - match:
       sourceSelector:
         app: proxy
-        color: red
       route:
         - destination:
           destinationSelector:
-            app: nginx
-            color: red
+            app: router1
+            device : router1
     - match:
       sourceSelector:
-        app: proxy
-        color: green
+        link: r1-r2
       route:
         - destination:
           destinationSelector:
-            app: nginx
-            color: green
+            app: firewall
+    - match:
+      sourceSelector:
+        app: firewall
+      route:
+        - destination:
+          destinationSelector:
+            app: gateway

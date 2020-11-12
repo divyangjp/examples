@@ -18,21 +18,36 @@ spec:
           image: networkservicemesh/proxy-sidecar-nse:latest
           imagePullPolicy: IfNotPresent
           env:
-            - name: ENDPOINT_NETWORK_SERVICE
+            - name: ADVERTISE_NSE_NAME
               value: "service-chain"
-            - name: ENDPOINT_LABELS
+            - name: ADVERTISE_NSE_LABELS
+              value: "app=firewall"
+            - name: CLIENT_NETWORK_SERVICE
+              value: "service-chain"
+            - name: CLIENT_LABELS
               value: "app=firewall"
             - name: TRACER_ENABLED
               value: "true"
             - name: IP_ADDRESS
-              value: "10.60.1.0/24"
+              value: "10.60.2.0/24"
           resources:
             limits:
               networkservicemesh.io/socket: 1
         - name: vyos
           image: 2stacks/vyos
+          command: ["/sbin/init"]
           imagePullPolicy: IfNotPresent
           securityContext:
             privileged: true
+          volumeMounts:
+          - mountPath: /lib/modules
+            name: vyos-libmodules
+      volumes:
+      - name: vyos-libmodules
+        hostPath:
+          # directory location on host
+          path: /lib/modules
+          # this field is optional
+          type: Directory
 metadata:
   name: firewall
